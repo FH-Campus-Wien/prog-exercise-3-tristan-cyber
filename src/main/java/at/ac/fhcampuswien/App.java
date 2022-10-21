@@ -6,18 +6,23 @@ import java.util.Scanner;
 public class App {
 
     public static void oneMonthCalendar(int days, int start) {
-        int a;
-        int b;
 
+        int a = 0;
+        int b = -1;
 
-
-
-        //modulo operator um nach 7 zeilenumbruch zu machen
-        //mit if kann man zwei stellige zahlen machen damit vor einstelligen ein abstand ist
-        //oder printf
-
-        // Beispiel 2 mit array lösen
-
+        for (int i = 0; i < days; i++) {
+            for (int j = 1; j < start && i == 0; j++) {
+                System.out.print("   ");
+                b++;
+            }
+            b++;
+            a++;
+            if (b % 7 == 0) {
+                System.out.println();
+            }
+            System.out.printf("%2d ", a);
+        }
+        System.out.println();
     }
 
     public static long[] lcg(long seed) {
@@ -38,6 +43,7 @@ public class App {
     public static int randomNumberBetweenOneAndHundred() {
         Random random = new Random();
         return random.nextInt(100) + 1;
+
     }
 
     public static void guessingGame(int numberToGuess) {
@@ -88,17 +94,32 @@ public class App {
 
     }
 
-    public static String camelCase(String convertToCamelcase){
-        String test = "abcsdfwaer sdaf";
-        return test;
+    public static String camelCase(String conToCamel){
+        conToCamel = conToCamel.substring(0, 1).toUpperCase() + conToCamel.substring(1).toLowerCase();
+        StringBuilder builder = new StringBuilder(conToCamel);
+
+        for (int i = 0; i < builder.length(); i++) {
+            if (builder.charAt(i) == '!'|| builder.charAt(i) == '.'){
+                builder.deleteCharAt(i);
+            } else if (builder.charAt(i) == '\'') {
+                builder.deleteCharAt(i);
+                builder.replace(i, i + 1, String.valueOf(builder.charAt(i)));
+            } else if (builder.charAt(i) == ' ') {
+                builder.deleteCharAt(i);
+                builder.replace(i, i + 1, String.valueOf(Character.toUpperCase(builder.charAt(i))));
+
+        }
     }
+
+return builder.toString();
+}
 
     public static int checkDigit(int [] numbers){
         int [] gewichtung = new int[numbers.length];
         int [] produkt = new int[numbers.length];
         int sum = 0;
-        int reminder = 0;
-        int checkDigit = 0;
+        int reminder;
+        int checkDigit;
 
         for (int i = 0; i < numbers.length; i++){
             gewichtung [i] = i +2;
@@ -126,20 +147,17 @@ public class App {
 
     public static void main(String[] args) {
 
-        /*
-       Scanner scanner = new Scanner(System.in);
-        int days = scanner.nextInt();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Task 1: one month calendar");
+        System.out.println();
+        System.out.print("Start: ");
         int start = scanner.nextInt();
-        int test = 1;
-        oneMonthCalendar(days,start); //da methode void ist hat sie keinen Output
-        guessingGame(test);
-        long [] randomNumbers = lcg(0); //Methodenaufruf // was die Methode zrückliefert
-        // steht dann in der Methode random Numbers
+        System.out.print("Days: ");
+        int days = scanner.nextInt();
+        oneMonthCalendar(days, start);
 
 
-*/
-
-        /*
         System.out.println("Task 3: Guessing Game");
         System.out.println();
         guessingGame(randomNumberBetweenOneAndHundred());
@@ -168,8 +186,10 @@ public class App {
         System.out.print("Convert into camelcase: ");
         Scanner scr = new Scanner(System.in);
         String convertToCamelCase = scr.nextLine();
-        CamelCase(convertToCamelCase);
-*/
+        camelCase(convertToCamelCase);
+        System.out.println(camelCase(convertToCamelCase));
+        System.out.println();
+
 
         System.out.println("Task 6: check digit");
         System.out.println();
